@@ -15,4 +15,7 @@
   -->
 <resources>
     <string name="app_name">Github Query</string>
+    <string name="introduce_busqueda_y_pulsa">Introduce lo que deseas buscar y pulsa sobre buscar</string>
+    <string name="aqui_resultados">Aquí aparecerán los resultados</string>
+    <string name="realice_busqueda">Realice una búsqueda</string>
 </resources>

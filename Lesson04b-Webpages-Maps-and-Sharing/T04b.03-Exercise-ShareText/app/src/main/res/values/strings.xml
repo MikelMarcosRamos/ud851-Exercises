@@ -15,4 +15,6 @@
 -->
 <resources>
     <string name="app_name">Implicit Intents</string>
+    <string name="texto_compartido">Texto Compartido</string>
+    <string name="titulo_texto_compartido">Título Texto Compartido</string>
 </resources>

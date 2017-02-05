@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements
                  */
                 mLoadingIndicator.setVisibility(View.VISIBLE);
 
-                // TODO (2) If mGithubJson is not null, deliver that result. Otherwise, force a load
+                // COMPLETED (2) If mGithubJson is not null, deliver that result. Otherwise, force a load
                 if (mGithubJson != null) {
                     deliverResult(mGithubJson);
                 } else {

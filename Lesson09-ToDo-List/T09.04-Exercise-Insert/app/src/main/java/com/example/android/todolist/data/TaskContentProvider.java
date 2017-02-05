@@ -17,10 +17,12 @@
 package com.example.android.todolist.data;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
@@ -78,16 +80,29 @@ public class TaskContentProvider extends ContentProvider {
 
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues values) {
-        // TODO (1) Get access to the task database (to write new data to)
+        // COMPLETED (1) Get access to the task database (to write new data to)
+        SQLiteDatabase db = mTaskDbHelper.getWritableDatabase();
 
-        // TODO (2) Write URI matching code to identify the match for the tasks directory
+        // COMPLETED (2) Write URI matching code to identify the match for the tasks directory
+        if (TaskContentProvider.sUriMatcher.match(uri) == TaskContentProvider.TASKS) {
 
-        // TODO (3) Insert new values into the database
-        // TODO (4) Set the value for the returnedUri and write the default case for unknown URI's
+            // COMPLETED (3) Insert new values into the database
+            long id = db.insert(TaskContract.TaskEntry.TABLE_NAME, null, values);
 
-        // TODO (5) Notify the resolver if the uri has been changed, and return the newly inserted URI
+            if (id > 0) {
+                // COMPLETED (4) Set the value for the returnedUri and write the default case for unknown URI's
+                Uri returnUri = ContentUris.withAppendedId(TaskContract.TaskEntry.CONTENT_URI, id);
+                // COMPLETED (5) Notify the resolver if the uri has been changed, and return the newly inserted URI
+                getContext().getContentResolver().notifyChange(uri, null);
 
-        throw new UnsupportedOperationException("Not yet implemented");
+                return returnUri;
+            } else {
+                throw new UnsupportedOperationException("Failed to insert row into: " + uri);
+            }
+
+        } else {
+            throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
     }
 
 
